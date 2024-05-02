@@ -281,6 +281,20 @@ mod tests {
 
     #[test]
     fn test_sleep_sort() {
+        let numbers = [5, 2, 4, 1, 3];
+        
+        // Skip the test if the array length is more than 10
+        if numbers.len() > 10 {
+            println!("Skipping sleep_sort test due to large array size.");
+            return;
+        }
+    
+        // Skip the test if any number is larger than 10
+        if numbers.iter().any(|&x| x > 10) {
+            println!("Skipping sleep_sort test due to large number in array.");
+            return;
+        }
+    
         test_sort(sleep_sort::sleep_sort);
     }
 
