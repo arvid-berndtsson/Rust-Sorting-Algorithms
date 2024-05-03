@@ -1,26 +1,23 @@
-pub fn strand_sort<T: Ord + Clone>(unsorted_list: &mut [T]) {
-    let mut sorted_list: Vec<T> = Vec::new();
-    let mut unsorted_list = unsorted_list.to_vec();
+pub fn strand_sort<T: Ord + Clone>(list: &mut [T]) {
+    let mut input = list.to_vec();
+    let mut sorted_list = Vec::new();
 
-    while !unsorted_list.is_empty() {
-        let mut extracted_sorted_sublist: Vec<T> = Vec::new();
-        let mut current_index = 0;
+    while !input.is_empty() {
+        let mut sorted_sublist = vec![input.remove(0)];
 
-        while current_index < unsorted_list.len() {
-            if extracted_sorted_sublist.is_empty()
-                || &unsorted_list[current_index] >= extracted_sorted_sublist.last().unwrap()
-            {
-                extracted_sorted_sublist.push(unsorted_list.remove(current_index));
+        input.retain(|item| {
+            if item >= sorted_sublist.last().unwrap() {
+                sorted_sublist.push(item.clone());
+                false
             } else {
-                current_index += 1;
+                true
             }
-        }
+        });
 
-        merge_sorted_sublist_into_sorted_list(&mut sorted_list, extracted_sorted_sublist);
+        merge_sorted_sublist_into_sorted_list(&mut sorted_list, sorted_sublist);
     }
 
-    unsorted_list.clear();
-    unsorted_list.extend(sorted_list);
+    list.clone_from_slice(&sorted_list[..]);
 }
 
 fn merge_sorted_sublist_into_sorted_list<T: Ord + Clone>(
@@ -28,20 +25,14 @@ fn merge_sorted_sublist_into_sorted_list<T: Ord + Clone>(
     mut sorted_sublist: Vec<T>,
 ) {
     let mut sorted_list_index = 0;
-    let sorted_sublist_index = 0;
 
-    while sorted_list_index < sorted_list.len() && sorted_sublist_index < sorted_sublist.len() {
-        if &sorted_sublist[sorted_sublist_index] < &sorted_list[sorted_list_index] {
-            sorted_list.insert(
-                sorted_list_index,
-                sorted_sublist.remove(sorted_sublist_index),
-            );
+    while sorted_list_index < sorted_list.len() && !sorted_sublist.is_empty() {
+        if &sorted_sublist[0] < &sorted_list[sorted_list_index] {
+            sorted_list.insert(sorted_list_index, sorted_sublist.remove(0));
         } else {
             sorted_list_index += 1;
         }
     }
 
-    if sorted_sublist_index < sorted_sublist.len() {
-        sorted_list.append(&mut sorted_sublist);
-    }
+    sorted_list.append(&mut sorted_sublist);
 }
