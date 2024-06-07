@@ -8,6 +8,7 @@ This project involves the implementation of various sorting algorithms in Rust.
   - [Algorithms Included](#algorithms-included)
     - [B](#b)
     - [C](#c)
+    - [F](#f)
     - [G](#g)
     - [H](#h)
     - [I](#i)
@@ -30,68 +31,76 @@ This project involves the implementation of various sorting algorithms in Rust.
 
 ✅ = Working
 ❌ = Not working
-❓ = Not started
+⏰ = Not started
 
 ### [B](#B)
 
-- ❌ Bitonic sort
-- ✅ Bogo sort
-- ✅ Bubble sort
+- ❌ [Bitonic sort](https://en.wikipedia.org/wiki/Bitonic_sorter)
+- ⏰ [Block sort](https://en.wikipedia.org/wiki/Block_sort)
+- ✅ [Bogo sort](https://en.wikipedia.org/wiki/Bogosort)
+- ✅ [Bubble sort](https://en.wikipedia.org/wiki/Bubble_sort)
+- ⏰ [Burst sort](https://en.wikipedia.org/wiki/Burstsort)
 
 ### [C](#C)
 
-- ✅ Cocktail sort
-- ✅ Comb sort
-- ✅ Counting sort
-- ❌ Cycle sort
+- ✅ [Cocktail shaker sort (or Cocktail sort)](https://en.wikipedia.org/wiki/Cocktail_shaker_sort)
+- ✅ [Comb sort](https://en.wikipedia.org/wiki/Comb_sort)
+- ✅ [Counting sort](https://en.wikipedia.org/wiki/Counting_sort)
+- ❌ [Cycle sort](https://en.wikipedia.org/wiki/Cycle_sort)
+
+### [F](#F)
+
+- ⏰ [Flash sort](https://en.wikipedia.org/wiki/Flashsort)
 
 ### [G](#G)
 
-- ✅ Gnome sort
+- ✅ [Gnome sort](https://en.wikipedia.org/wiki/Gnome_sort)
 
 ### [H](#H)
 
-- ✅ Heap sort
+- ✅ [Heap sort](https://en.wikipedia.org/wiki/Heapsort)
 
 ### [I](#I)
 
-- ✅ Insertion sort
+- ✅ [Insertion sort](https://en.wikipedia.org/wiki/Insertion_sort)
+- ⏰ [In place merge sort](https://en.wikipedia.org/wiki/In-place_merge_sort)
 
 ### [L](#L)
 
-- ❌ Library sort
+- ❌ [Library sort](https://en.wikipedia.org/wiki/Library_sort)
 
 ### [M](#M)
 
-- ✅ Merge sort
+- ✅ [Merge sort](https://en.wikipedia.org/wiki/Merge_sort)
 
 ### [P](#P)
 
-- ✅ Pancake sort
-- ❌ Patience sort
+- ✅ [Pancake sort](https://en.wikipedia.org/wiki/Pancake_sorting)
+- ❌ [Patience sorting](https://en.wikipedia.org/wiki/Patience_sorting)
+- ⏰ [Postman sort](https://en.wikipedia.org/wiki/Postman_sort)
 
 ### [Q](#Q)
 
-- ✅ Quick sort
+- ✅ [Quick sort](https://en.wikipedia.org/wiki/Quicksort)
 
 ### [R](#R)
 
-- ✅ Radix sort
-- ✅ Red-Black Tree sort
+- ✅ [Radix sort](https://en.wikipedia.org/wiki/Radix_sort)
+- ✅ [Red-Black Tree sort](https://en.wikipedia.org/wiki/Red%E2%80%93black_tree)
 
 ### [S](#S)
 
-- ✅ Selection sort
-- ✅ Shell sort
-- ✅ Sleep sort
-- ❌ Smooth sort
-- ✅ Stooge sort
-- ✅ Strand sort
+- ✅ [Selection sort](https://en.wikipedia.org/wiki/Selection_sort)
+- ✅ [Shell sort](https://en.wikipedia.org/wiki/Shellsort)
+- ✅ [Sleep sort](https://www.geeksforgeeks.org/sleep-sort-king-laziness-sorting-sleeping/)
+- ❌ [Smooth sort](https://en.wikipedia.org/wiki/Smoothsort)
+- ✅ [Stooge sort](https://en.wikipedia.org/wiki/Stooge_sort)
+- ✅ [Strand sort](https://en.wikipedia.org/wiki/Strand_sort)
 
 ### [T](#T)
 
-- ✅ Tim sort
-- ✅ Tree sort
+- ✅ [Tim sort](https://en.wikipedia.org/wiki/Timsort)
+- ✅ [Tree sort](https://en.wikipedia.org/wiki/Tree_sort)
 
 ## Getting Started
 

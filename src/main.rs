@@ -17,7 +17,7 @@ mod algorithms {
     pub mod patience_sort;
     pub mod quick_sort;
     pub mod radix_sort;
-    pub mod rb_tree_sort;
+    pub mod red_and_black_tree_sort;
     pub mod selection_sort;
     pub mod shell_sort;
     pub mod sleep_sort;
@@ -100,7 +100,7 @@ fn main() {
         ),
         (
             "Red-Black Tree sort",
-            Box::new(|numbers: &mut [i32]| algorithms::rb_tree_sort::red_black_tree_sort(numbers)),
+            Box::new(|numbers: &mut [i32]| algorithms::red_and_black_tree_sort::red_black_tree_sort(numbers)),
         ),
         (
             "Selection sort",
@@ -265,8 +265,8 @@ mod tests {
     }
 
     #[test]
-    fn test_rb_tree_sort() {
-        test_sort(rb_tree_sort::red_black_tree_sort);
+    fn test_red_and_black_tree_sort() {
+        test_sort(red_and_black_tree_sort::red_black_tree_sort);
     }
 
     #[test]

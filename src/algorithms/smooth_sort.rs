@@ -1,76 +1,128 @@
-pub fn smooth_sort<T: Ord + Copy>(input_array: &mut [T]) {
-    let array_length = input_array.len();
-    let mut heap_size = 0;
-    let mut index = 0;
+use std::fmt::Debug;
 
-    while index < array_length {
-        if (heap_size & 3) == 3 {
-            sift(input_array, index - 1, heap_size >> 2);
-            heap_size = (heap_size >> 2) + 1;
-        } else if index + 1 < array_length {
-            sift(input_array, index, heap_size);
-            heap_size = (heap_size << 2) + 3;
-            index += 1;
+pub fn smooth_sort<T: Ord + Clone + Debug>(list: &mut [T]) {
+    let len = list.len();
+    let mut heap = 0;
+    let mut r = 0;
+
+    while r < len {
+        if (heap & 7) == 3 {
+            sift(list, r - 1, heap >> 3);
+            heap = (heap >> 2) + 1;
+        } else if (heap & 3) == 1 && r + 1 < len {
+            sift(list, r - 1, heap >> 2);
+            heap = (heap >> 2) + 1;
         } else {
-            trinkle(input_array, index, heap_size, false);
-            break;
+            trinkle(list, r, heap, false);
+            if heap == 3 {
+                heap = 1;
+            } else {
+                let lp = heap.trailing_zeros() as usize;
+                if lp < std::mem::size_of_val(&heap) * 8 - 1 {
+                    heap = (1 << (lp + 1)) - 1;
+                } else {
+                    heap = std::usize::MAX;
+                }
+            }
         }
-        index += 1;
+        r += 1;
     }
 
-    while heap_size > 1 {
-        heap_size -= 1;
-        if index == 0 {
-            break;
+    while heap != 1 {
+        let lp = heap.trailing_zeros() as usize;
+        if lp < std::mem::size_of_val(&heap) * 8 - 1 {
+            heap = (1 << (lp + 1)) - 1;
+        } else {
+            heap = std::usize::MAX;
         }
-        trinkle(input_array, index - 1, heap_size, false);
-        index -= 1;
+        trinkle(list, r, heap, false);
+        r -= 1;
+        if r > 0 {
+            trinkle(list, r, heap, false);
+            r -= 1;
+        }
+    }
+
+    if r > 0 {
+        trinkle(list, r, heap, false);
     }
 }
 
-fn sift<T: Ord + Copy>(input_array: &mut [T], mut sift_index: usize, mut sift_heap: usize) {
-    let sift_value = input_array[sift_index];
-    while sift_heap > 1 {
-        let sift_heap_parent = sift_heap >> 1;
-        if sift_heap_parent > sift_index {
-            break;
+fn sift<T: Ord + Clone + Debug>(list: &mut [T], r: usize, mut root: usize) {
+    println!("Before sift: {:?}", list);
+    let mut r = r;
+    let mut t = list[r].clone();
+    let mut r2;
+    if root != std::usize::MAX {
+        if root << 1 <= r {
+            r2 = r - (root << 1);
+        } else {
+            r2 = 0;
         }
-        let sift_heap_child = sift_index - sift_heap_parent;
-        if sift_value >= input_array[sift_heap_child] {
-            break;
-        }
-        input_array[sift_index] = input_array[sift_heap_child];
-        sift_index = sift_heap_child;
-        sift_heap = sift_heap_parent;
+    } else {
+        r2 = r;
     }
-    input_array[sift_index] = sift_value;
+    while root > 0 {
+        if list[r2] <= t {
+            break;
+        }
+        list[r] = list[r2].clone();
+        r = r2;
+        root >>= 1;
+        if root < std::usize::MAX / 2 && r2 > root << 1 {
+            r2 -= root << 1;
+        } else {
+            r2 = 0;
+        }
+    }
+    list[r] = t;
+    println!("After sift: {:?}", list);
+    println!("r: {}, root: {}", r, root);
 }
 
-fn trinkle<T: Ord + Copy>(
-    input_array: &mut [T],
-    mut trinkle_index: usize,
-    mut trinkle_heap: usize,
-    mut is_trust: bool,
+fn trinkle<T: Ord + Clone + Debug>(
+    list: &mut [T],
+    mut r: usize,
+    mut root: usize,
+    mut trusty: bool,
 ) {
-    let trinkle_value = input_array[trinkle_index];
-    while trinkle_heap > 1 {
-        let trinkle_heap_parent = trinkle_heap >> 1;
-        if trinkle_heap_parent > trinkle_index {
+    println!("Before trinkle: {:?}", list);
+    println!("r: {}, root: {}, trusty: {}", r, root, trusty);
+    if r >= list.len() {
+        return;
+    }
+    if root > r {
+        root = r;
+    }
+    let t = list[r].clone();
+    let mut r3;
+    if root < std::usize::MAX - 2 && r > ((root + 3) >> 1) {
+        r3 = (r - 1) / 2; // calculate parent index correctly
+    } else {
+        r3 = r;
+    }
+    while r3 < list.len() && list[r3] > t {
+        // ensure r3 is a valid index
+        if !trusty && r - r3 <= root {
             break;
         }
-        let trinkle_heap_child = trinkle_index - trinkle_heap_parent;
-        if trinkle_value < input_array[trinkle_heap_child]
-            || (is_trust
-                && trinkle_heap_child == trinkle_index - 1
-                && input_array[trinkle_index - 1] <= input_array[trinkle_index])
-        {
-            input_array[trinkle_index] = input_array[trinkle_heap_child];
-            trinkle_index = trinkle_heap_child;
-            trinkle_heap = trinkle_heap_parent;
-            is_trust = false;
-        } else {
+        list[r] = list[r3].clone();
+        r = r3;
+        if root == 0 {
             break;
+        }
+        root = (root - 1) >> 1;
+        if root < std::usize::MAX - 2 && r > ((root + 3) >> 1) {
+            r3 = (r - 1) / 2; // calculate parent index correctly
+        } else {
+            r3 = r;
         }
     }
-    input_array[trinkle_index] = trinkle_value;
+    if r != r3 {
+        list[r] = list[r3].clone();
+        list[r3] = t.clone();
+    }
+    sift(list, r, root);
+    println!("After trinkle: {:?}", list);
+    println!("r: {}, root: {}, trusty: {}", r, root, trusty);
 }
