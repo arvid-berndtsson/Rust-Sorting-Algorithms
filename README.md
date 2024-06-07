@@ -2,48 +2,94 @@
 
 This project involves the implementation of various sorting algorithms in Rust.
 
-## Table of content
+## Table of Contents
+- [Rust Sorting Algorithms](#rust-sorting-algorithms)
+  - [Table of Contents](#table-of-contents)
+  - [Algorithms Included](#algorithms-included)
+    - [B](#b)
+    - [C](#c)
+    - [G](#g)
+    - [H](#h)
+    - [I](#i)
+    - [L](#l)
+    - [M](#m)
+    - [P](#p)
+    - [Q](#q)
+    - [R](#r)
+    - [S](#s)
+    - [T](#t)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+  - [Installing](#installing)
+  - [Running](#running)
+  - [Testing](#testing)
+  - [License](#license)
+
 
 ## Algorithms Included
+
 ✅ = Working
 ❌ = Not working
 ❓ = Not started
 
 ### [B](#B)
+
 - ❌ Bitonic sort
 - ✅ Bogo sort
 - ✅ Bubble sort
+
 ### [C](#C)
+
 - ✅ Cocktail sort
 - ✅ Comb sort
 - ✅ Counting sort
 - ❌ Cycle sort
+
 ### [G](#G)
+
 - ✅ Gnome sort
-### [H](#H]
+
+### [H](#H)
+
 - ✅ Heap sort
+
 ### [I](#I)
+
 - ✅ Insertion sort
+
 ### [L](#L)
+
 - ❌ Library sort
+
 ### [M](#M)
+
 - ✅ Merge sort
+
 ### [P](#P)
+
 - ✅ Pancake sort
 - ❌ Patience sort
+
 ### [Q](#Q)
+
 - ✅ Quick sort
+
 ### [R](#R)
+
 - ✅ Radix sort
 - ✅ Red-Black Tree sort
+
 ### [S](#S)
+
 - ✅ Selection sort
 - ✅ Shell sort
 - ✅ Sleep sort
 - ❌ Smooth sort
 - ✅ Stooge sort
 - ✅ Strand sort
+
 ### [T](#T)
+
 - ✅ Tim sort
 - ✅ Tree sort
 
