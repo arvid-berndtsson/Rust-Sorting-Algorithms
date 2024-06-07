@@ -4,7 +4,7 @@ mod algorithms {
     pub mod bitonic_sort;
     pub mod bogo_sort;
     pub mod bubble_sort;
-    pub mod cocktail_sort;
+    pub mod cocktail_shaker_sort;
     pub mod comb_sort;
     pub mod counting_sort;
     pub mod cycle_sort;
@@ -46,7 +46,7 @@ fn main() {
         ),
         (
             "Cocktail sort",
-            Box::new(|numbers: &mut [i32]| algorithms::cocktail_sort::cocktail_sort(numbers)),
+            Box::new(|numbers: &mut [i32]| algorithms::cocktail_shaker_sort::cocktail_sort(numbers)),
         ),
         (
             "Comb sort",
@@ -198,7 +198,7 @@ mod tests {
 
     #[test]
     fn test_cocktail_sort() {
-        test_sort(cocktail_sort::cocktail_sort);
+        test_sort(cocktail_shaker_sort::cocktail_sort);
     }
 
     #[test]
